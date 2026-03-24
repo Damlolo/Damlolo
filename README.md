@@ -73,3 +73,16 @@ CHAINSCAN_API_KEY=placeholder
 
 - This is a production-minded scaffold, but you should still add tests, allowlists, royalties, and security review before mainnet.
 - For testnet tokens use 0G faucet: https://faucet.0g.ai
+
+
+## Troubleshooting
+
+### `TypeError: Cannot read properties of undefined (reading "address")`
+This usually means Hardhat could not load a deployer signer for the selected network.
+
+Fix:
+1. Ensure `.env` exists (`cp .env.example .env`).
+2. Set `PRIVATE_KEY` with `0x` prefix in `.env`.
+3. Retry: `npm run deploy:testnet`.
+
+Also ensure the private key account has testnet 0G from faucet: https://faucet.0g.ai

@@ -4,11 +4,24 @@ const hre = require("hardhat");
 
 async function main() {
   const networkName = hre.network.name;
-  const [deployer] = await hre.ethers.getSigners();
-  console.log(`Deploying ZeroGLaunchpad to ${networkName} with:`, deployer.address);
+  const signers = await hre.ethers.getSigners();
+
+  if (!signers.length) {
+    throw new Error(
+      [
+        "No deployer account found for this network.",
+        "Set PRIVATE_KEY in your .env (with 0x prefix), then retry.",
+        "Example: PRIVATE_KEY=0xabc123...",
+      ].join(" ")
+    );
+  }
+
+  const deployer = signers[0];
+  const deployerAddress = await deployer.getAddress();
+  console.log(`Deploying ZeroGLaunchpad to ${networkName} with:`, deployerAddress);
 
   const launchpadFactory = await hre.ethers.getContractFactory("ZeroGLaunchpad");
-  const launchpad = await launchpadFactory.deploy(deployer.address);
+  const launchpad = await launchpadFactory.deploy(deployerAddress);
   await launchpad.waitForDeployment();
 
   const address = await launchpad.getAddress();
