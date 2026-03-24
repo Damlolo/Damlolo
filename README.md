@@ -86,3 +86,12 @@ Fix:
 3. Retry: `npm run deploy:testnet`.
 
 Also ensure the private key account has testnet 0G from faucet: https://faucet.0g.ai
+
+
+### `ProviderError: no matching receipts found`
+This is usually an RPC indexing/polling issue (transaction broadcasted but receipt API lags).
+
+Fix:
+1. Wait ~15-60 seconds and check tx hash on ChainScan.
+2. Retry deployment (the script now retries receipt polling + checks contract bytecode).
+3. If it still fails, switch `OG_TESTNET_RPC` to another provider endpoint (0G docs suggest QuickNode or Thirdweb as alternatives).
