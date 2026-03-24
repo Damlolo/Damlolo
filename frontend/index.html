@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>0G NFT Launchpad</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <h1>0G Pink Launchpad</h1>
+        <p class="subtitle">Create, collect, and trade NFTs on 0G.</p>
+      </div>
+      <div class="topbar-actions">
+        <button id="connectBtn">Connect Wallet</button>
+        <button id="switchBtn" class="secondary">Switch 0G Network</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="card">
+        <label>
+          Launchpad Contract Address
+          <input id="launchpadAddress" placeholder="0x..." />
+        </label>
+        <p id="account">Wallet: not connected</p>
+      </section>
+
+      <nav class="tabs">
+        <button class="tab active" data-tab="home">Home (Marketplace)</button>
+        <button class="tab" data-tab="create">Create NFT</button>
+        <button class="tab" data-tab="collection">NFT Collection</button>
+        <button class="tab" data-tab="profile">Profile</button>
+      </nav>
+
+      <section id="tab-home" class="tab-panel active">
+        <div class="panel-head">
+          <h2>Marketplace</h2>
+          <button id="refreshMarket" class="secondary">Refresh</button>
+        </div>
+        <div id="marketGrid" class="grid"></div>
+      </section>
+
+      <section id="tab-create" class="tab-panel">
+        <h2>Create NFT Collection</h2>
+        <div class="form-grid">
+          <label>Name <input id="name" placeholder="My Collection" /></label>
+          <label>Symbol <input id="symbol" placeholder="MYNFT" /></label>
+          <label>Max supply <input id="maxSupply" type="number" value="1000" /></label>
+          <label>Mint price (0G) <input id="price" value="0.05" /></label>
+          <label>Base URI <input id="baseUri" placeholder="ipfs://CID/" /></label>
+          <label>Sale start (unix, optional) <input id="saleStart" type="number" /></label>
+          <label>Sale end (unix, optional) <input id="saleEnd" type="number" /></label>
+          <label>Treasury <input id="treasury" placeholder="0x..." /></label>
+        </div>
+        <button id="createBtn">Create Project</button>
+      </section>
+
+      <section id="tab-collection" class="tab-panel">
+        <h2>Your NFT Collections</h2>
+        <p class="hint">Collections you created from this dApp.</p>
+        <div id="myCollections" class="grid"></div>
+      </section>
+
+      <section id="tab-profile" class="tab-panel">
+        <h2>Profile</h2>
+        <div class="profile-wrap">
+          <label>Username <input id="username" placeholder="pinkbuilder" /></label>
+          <label>Bio <textarea id="bio" placeholder="Write your bio..."></textarea></label>
+          <label>Profile Picture URL <input id="pfp" placeholder="https://..." /></label>
+          <label>Banner URL <input id="banner" placeholder="https://..." /></label>
+          <label>X (Twitter) <input id="socialX" placeholder="https://x.com/..." /></label>
+          <label>Discord <input id="socialDiscord" placeholder="https://discord.gg/..." /></label>
+          <label>Website <input id="socialWebsite" placeholder="https://..." /></label>
+          <button id="saveProfile">Save Profile</button>
+        </div>
+        <div id="profilePreview" class="profile-preview"></div>
+      </section>
+
+      <pre id="log"></pre>
+    </main>
+
+    <script src="./config.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/ethers@6.13.2/dist/ethers.umd.min.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>
