@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>0G NFT Launchpad</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main>
+      <h1>0G NFT Launchpad</h1>
+      <p>Connect wallet, create a project, and mint NFTs on 0G chain.</p>
+
+      <section class="card">
+        <h2>Network</h2>
+        <button id="connectBtn">Connect Wallet</button>
+        <button id="switchBtn">Switch to Configured 0G Network</button>
+        <p id="account"></p>
+      </section>
+
+      <section class="card">
+        <h2>Launchpad Contract</h2>
+        <label>
+          Contract address
+          <input id="launchpadAddress" placeholder="0x..." />
+        </label>
+      </section>
+
+      <section class="card">
+        <h2>Create NFT Project (owner only)</h2>
+        <label>Name <input id="name" placeholder="My Collection" /></label>
+        <label>Symbol <input id="symbol" placeholder="MYNFT" /></label>
+        <label>Max supply <input id="maxSupply" type="number" value="1000" /></label>
+        <label>Mint price (0G) <input id="price" value="0.05" /></label>
+        <label>Base URI <input id="baseUri" placeholder="ipfs://CID/" /></label>
+        <label>Sale start (unix, optional) <input id="saleStart" type="number" /></label>
+        <label>Sale end (unix, optional) <input id="saleEnd" type="number" /></label>
+        <label>Treasury <input id="treasury" placeholder="0x..." /></label>
+        <button id="createBtn">Create Project</button>
+      </section>
+
+      <section class="card">
+        <h2>Mint</h2>
+        <label>Project ID <input id="projectId" type="number" value="1" /></label>
+        <label>Quantity <input id="quantity" type="number" value="1" /></label>
+        <button id="mintBtn">Mint NFT</button>
+      </section>
+
+      <pre id="log"></pre>
+    </main>
+
+    <script src="./config.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/ethers@6.13.2/dist/ethers.umd.min.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>
