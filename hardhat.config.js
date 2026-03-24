@@ -1,7 +1,31 @@
 require("@nomicfoundation/hardhat-toolbox");
 require("dotenv").config();
 
-const PRIVATE_KEY = process.env.PRIVATE_KEY || "";
+function normalizePrivateKey(rawValue) {
+  if (!rawValue) return "";
+
+  let key = rawValue.trim().replace(/^['"]|['"]$/g, "");
+
+  // Common copy/paste mistake: key already has 0x and user prepends another 0x.
+  if (key.startsWith("0x0x")) {
+    key = key.slice(2);
+  }
+
+  if (!key.startsWith("0x")) {
+    key = `0x${key}`;
+  }
+
+  if (!/^0x[0-9a-fA-F]{64}$/.test(key)) {
+    console.warn(
+      "[hardhat.config] PRIVATE_KEY is invalid. Expected exactly 32 bytes (64 hex chars, optional 0x prefix). Ignoring PRIVATE_KEY for now."
+    );
+    return "";
+  }
+
+  return key;
+}
+
+const PRIVATE_KEY = normalizePrivateKey(process.env.PRIVATE_KEY || "");
 
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {

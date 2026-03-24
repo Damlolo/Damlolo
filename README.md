@@ -104,3 +104,22 @@ Fix:
 - **NFT Collection** tab: shows collections created by connected wallet in this dApp (localStorage-backed).
 - **Profile** tab: username, bio, profile picture URL, banner URL, and social links (X/Discord/website), saved per wallet in localStorage.
 - Updated theme to a **white + pink/purple** visual style.
+
+
+### `Error HH8 ... private key too long, expected 32 bytes`
+Your `PRIVATE_KEY` format is invalid. Hardhat needs exactly **64 hex chars** (32 bytes), with optional `0x` prefix.
+
+Use one of these valid formats in `.env`:
+
+```dotenv
+PRIVATE_KEY=0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+# or
+PRIVATE_KEY=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+```
+
+Common mistakes:
+- using a seed phrase instead of private key
+- pasting two `0x` prefixes (`0x0x...`)
+- leaving quotes/spaces/newlines around key
+
+The config now normalizes/validates the key and ignores invalid keys with a warning.
