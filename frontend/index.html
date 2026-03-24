@@ -16,6 +16,7 @@
         <button id="connectBtn">Connect Wallet</button>
         <button id="switchBtn" class="secondary">Switch 0G Network</button>
       </div>
+      <button id="profileQuickBtn" class="profile-icon-btn" title="Open Profile">👤</button>
     </header>
 
     <main>
@@ -28,10 +29,22 @@
       </section>
 
       <nav class="tabs">
-        <button class="tab active" data-tab="home">Home (Marketplace)</button>
-        <button class="tab" data-tab="create">Create NFT</button>
-        <button class="tab" data-tab="collection">NFT Collection</button>
-        <button class="tab" data-tab="profile">Profile</button>
+        <button class="tab active" data-tab="home">
+          <span class="tab-icon">🏠</span>
+          <span class="tab-label">Home (Marketplace)</span>
+        </button>
+        <button class="tab" data-tab="create">
+          <span class="tab-icon">✨</span>
+          <span class="tab-label">Create NFT</span>
+        </button>
+        <button class="tab" data-tab="collection">
+          <span class="tab-icon">🗂️</span>
+          <span class="tab-label">NFT Collection</span>
+        </button>
+        <button class="tab" data-tab="profile">
+          <span class="tab-icon">👤</span>
+          <span class="tab-label">Profile</span>
+        </button>
       </nav>
 
       <section id="tab-home" class="tab-panel active">
@@ -68,8 +81,8 @@
         <div class="profile-wrap">
           <label>Username <input id="username" placeholder="pinkbuilder" /></label>
           <label>Bio <textarea id="bio" placeholder="Write your bio..."></textarea></label>
-          <label>Profile Picture URL <input id="pfp" placeholder="https://..." /></label>
-          <label>Banner URL <input id="banner" placeholder="https://..." /></label>
+          <label>Profile Picture Upload <input id="pfpUpload" type="file" accept="image/*" /></label>
+          <label>Banner Upload <input id="bannerUpload" type="file" accept="image/*" /></label>
           <label>X (Twitter) <input id="socialX" placeholder="https://x.com/..." /></label>
           <label>Discord <input id="socialDiscord" placeholder="https://discord.gg/..." /></label>
           <label>Website <input id="socialWebsite" placeholder="https://..." /></label>

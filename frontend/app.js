@@ -34,6 +34,8 @@ const profilePreview = document.getElementById("profilePreview");
 let provider;
 let signer;
 let walletAddress = "";
+let uploadedPfp = "";
+let uploadedBanner = "";
 
 if (appConfig.launchpadAddress) {
   launchpadAddressInput.value = appConfig.launchpadAddress;
@@ -226,17 +228,27 @@ window.mintFromMarket = async function mintFromMarket(projectId) {
   }
 };
 
+async function fileToDataUrl(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
 function hydrateProfile() {
   if (!walletAddress) return;
   const data = JSON.parse(localStorage.getItem(userKey("profile")) || "{}");
 
   document.getElementById("username").value = data.username || "";
   document.getElementById("bio").value = data.bio || "";
-  document.getElementById("pfp").value = data.pfp || "";
-  document.getElementById("banner").value = data.banner || "";
   document.getElementById("socialX").value = data.socialX || "";
   document.getElementById("socialDiscord").value = data.socialDiscord || "";
   document.getElementById("socialWebsite").value = data.socialWebsite || "";
+
+  uploadedPfp = data.pfp || "";
+  uploadedBanner = data.banner || "";
 
   renderProfilePreview(data);
 }
@@ -263,8 +275,8 @@ function saveProfile() {
   const data = {
     username: document.getElementById("username").value.trim(),
     bio: document.getElementById("bio").value.trim(),
-    pfp: document.getElementById("pfp").value.trim(),
-    banner: document.getElementById("banner").value.trim(),
+    pfp: uploadedPfp,
+    banner: uploadedBanner,
     socialX: document.getElementById("socialX").value.trim(),
     socialDiscord: document.getElementById("socialDiscord").value.trim(),
     socialWebsite: document.getElementById("socialWebsite").value.trim(),
@@ -308,6 +320,34 @@ document.getElementById("saveProfile").addEventListener("click", () => {
 document.getElementById("refreshMarket").addEventListener("click", () =>
   loadMarketplace().catch((e) => log(e.message || String(e)))
 );
+
+document.getElementById("profileQuickBtn").addEventListener("click", () => setTab("profile"));
+
+document.getElementById("pfpUpload").addEventListener("change", async (event) => {
+  if (!walletAddress) {
+    log("Connect wallet before uploading profile assets.");
+    return;
+  }
+  const file = event.target.files?.[0];
+  if (!file) return;
+  uploadedPfp = await fileToDataUrl(file);
+  const existing = JSON.parse(localStorage.getItem(userKey("profile")) || "{}");
+  renderProfilePreview({ ...existing, pfp: uploadedPfp, banner: uploadedBanner || existing.banner });
+  log("Profile picture selected. Click Save Profile to persist.");
+});
+
+document.getElementById("bannerUpload").addEventListener("change", async (event) => {
+  if (!walletAddress) {
+    log("Connect wallet before uploading profile assets.");
+    return;
+  }
+  const file = event.target.files?.[0];
+  if (!file) return;
+  uploadedBanner = await fileToDataUrl(file);
+  const existing = JSON.parse(localStorage.getItem(userKey("profile")) || "{}");
+  renderProfilePreview({ ...existing, banner: uploadedBanner, pfp: uploadedPfp || existing.pfp });
+  log("Banner image selected. Click Save Profile to persist.");
+});
 
 renderProfilePreview({});
 renderMyCollections();

@@ -102,7 +102,7 @@ Fix:
 - **Home** tab: simple marketplace view (lists launchpad projects and mints from cards).
 - **Create NFT** tab: create new launchpad collection/project.
 - **NFT Collection** tab: shows collections created by connected wallet in this dApp (localStorage-backed).
-- **Profile** tab: username, bio, profile picture URL, banner URL, and social links (X/Discord/website), saved per wallet in localStorage.
+- **Profile** tab: username, bio, profile picture upload, banner upload, and social links (X/Discord/website), saved per wallet in localStorage.
 - Updated theme to a **white + pink/purple** visual style.
 
 
