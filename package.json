@@ -1,0 +1,20 @@
+{
+  "name": "0g-nft-launchpad",
+  "version": "1.0.0",
+  "private": true,
+  "description": "NFT launchpad scaffold for 0G Chain",
+  "scripts": {
+    "compile": "hardhat compile",
+    "deploy:testnet": "hardhat run scripts/deploy.js --network testnet",
+    "deploy:mainnet": "hardhat run scripts/deploy.js --network mainnet",
+    "host:frontend": "node scripts/host-frontend.js"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "dotenv": "^16.4.5",
+    "hardhat": "^2.22.10"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.0.2"
+  }
+}
